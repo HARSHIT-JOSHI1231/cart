@@ -1,22 +1,6 @@
 import React from 'react';
 
 class CartItem extends React.Component {
-   
-
-    // testing(){
-    //   const promise = new Promise((resolve, reject)=>{
-    //     setTimeout(()=>{
-    //       resolve('done');
-    //     },5000);
-    //   })
-    //   promise.then(()=>{
-    //     //setState acts like a synchronous call
-    //     this.setState({qty: this.state.qty + 10});
-    //     console.log('state', this.state);
-    //   });
-    // }
-
-    // this.increaseQuantity = this.increaseQuantity.bind(this);
     increaseQuantity=()=>{
         // console.log('this',this.state)
         // setState form 1
@@ -33,6 +17,7 @@ class CartItem extends React.Component {
           console.log('this.state', this.state)
         })
     }
+
     decreaseQuantity=()=>{
       const {qty} = this.state;
       if(qty===0)
@@ -46,6 +31,7 @@ class CartItem extends React.Component {
   render () {
     console.log('this.props', this.props)
     const {price,title, qty } = this.props.product;
+    const {product, onIncreaseQuantity, onDecreaseQuantity, onDeleteProduct} = this.props
     return (
       <div className="cart-item">
         <div className="left-block">
@@ -61,18 +47,19 @@ class CartItem extends React.Component {
             alt='increase'
             className='action-icons' 
             src='https://cdn-icons-png.flaticon.com/512/992/992651.png'
-            onClick={this.increaseQuantity}
+            onClick={()=>onIncreaseQuantity(product)}
             />
             <img 
             alt='decrease'
             className='action-icons' 
             src='https://cdn-icons-png.flaticon.com/512/992/992683.png'
-            onClick={this.decreaseQuantity}
+            onClick={()=>onDecreaseQuantity(product)}
             />
             <img 
             alt='delete'
             className='action-icons'
              src='https://cdn-icons-png.flaticon.com/512/1214/1214428.png'
+             onClick={()=>onDeleteProduct(product)}
              />
           </div>
         </div>
